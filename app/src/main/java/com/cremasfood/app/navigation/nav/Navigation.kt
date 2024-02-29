@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.cremasfood.app.features.home.view.HomeScreen
 import com.cremasfood.app.features.splash.view.SplashScreen
 import com.cremasfood.app.navigation.manager.NavigationCommand
 import com.cremasfood.app.navigation.manager.NavigationManager
@@ -33,7 +34,9 @@ fun Navigation(navController: NavHostController, startDestination: String) {
         composable(Screen.Splash.route) {
             SplashScreen()
         }
-        composable(Screen.Home.route) {}
+        composable(Screen.Home.route) {
+            HomeScreen()
+        }
         composable(Screen.Details.route) {}
     }
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Cremas Food</string>
+    <string name="cremas_content_accessibility_logo">Cremas Food Logo</string>
+    <string name="cremas_content_accessibility_back">Back</string>
+    <string name="bt_cremas_cancel">cancel</string>
+    <string name="cremas_search_recipe">search a recipe</string>
+    <string name="cremas_tb_title">Crema`s Food</string>
 </resources>

@@ -5,9 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,7 +39,7 @@ fun Splash(
     val navigation: SplashNavigation by inject()
 
     Scaffold(
-        contentColor = BackgroundColor,
+        containerColor = BackgroundColor,
         bottomBar = {
             Box(
                 modifier = modifier.fillMaxSize().padding(50.dp),
@@ -48,36 +47,35 @@ fun Splash(
             ) {
                 Loading()
             }
-        }
-    ) { padding ->
-        Column(
-            modifier = modifier
-                .padding(padding),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            val matrix = ColorMatrix()
+        },
+        content = { it
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                val matrix = ColorMatrix()
 
-            AsyncImage(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                model = ImageRequest
-                    .Builder(LocalContext.current)
-                    .data(R.drawable.cremas_main_logo)
-                    .build(),
-                colorFilter = ColorFilter.colorMatrix(matrix),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+                AsyncImage(
+                    modifier = modifier
+                        .size(300.dp),
+                    model = ImageRequest
+                        .Builder(LocalContext.current)
+                        .data(R.drawable.cremas_main_logo)
+                        .build(),
+                    colorFilter = ColorFilter.colorMatrix(matrix),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
 
-            timer?.cancel()
-            timer = object : CountDownTimer(3000, 3000) {
-                override fun onTick(p0: Long) {}
-                override fun onFinish() {
-                    navigation.navigateToHome()
-                }
-            }.start()
+                timer?.cancel()
+                timer = object : CountDownTimer(3000, 3000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        navigation.navigateToHome()
+                    }
+                }.start()
+            }
         }
-    }
+    )
 }
