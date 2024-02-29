@@ -14,6 +14,6 @@ data class RecipeDomain(
     val imageBase64: String? = null,
     val description: String? = null,
     val country: CountryDomain? = null,
-    val recipeGroup: @RawValue MutableList<RecipeGroupDomain>? = null,
-    val recipeIngredient: @RawValue MutableList<RecipeIngredientDomain>? = null
+    val recipeGroup: @RawValue List<RecipeGroupDomain>? = null,
+    val recipeIngredient: @RawValue List<RecipeIngredientDomain>? = null
 ) : Parcelable

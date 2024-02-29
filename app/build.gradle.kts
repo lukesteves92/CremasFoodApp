@@ -21,7 +21,7 @@ android {
             useSupportLibrary = true
         }
         android.buildFeatures.buildConfig = true
-        buildConfigField(type = "String", name = "URL_BASE", value = "\"https://teste.com.br/\"")
+        buildConfigField(type = "String", name = "URL_BASE", value = "\"http://localhost:5040\"")
     }
 
     buildTypes {

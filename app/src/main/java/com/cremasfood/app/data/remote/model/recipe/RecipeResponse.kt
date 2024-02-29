@@ -17,7 +17,7 @@ data class RecipeResponse(
     @SerializedName(value = "Country")
     val country: CountryResponse? = null,
     @SerializedName(value = "RecipeGroup")
-    val recipeGroup: MutableList<RecipeGroupResponse>? = null,
+    val recipeGroup: List<RecipeGroupResponse>? = null,
     @SerializedName(value = "RecipeIngredient")
-    val recipeIngredient: MutableList<RecipeIngredientResponse>? = null
+    val recipeIngredient: List<RecipeIngredientResponse>? = null
 )

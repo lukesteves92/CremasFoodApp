@@ -41,6 +41,6 @@ internal fun RecipeResponse.recipeResponseToDomain() = RecipeDomain(
     imageBase64 = this.imageBase64,
     description = this.description,
     country = this.country?.countryResponseToDomain(),
-    recipeGroup = this.recipeGroup?.map { recipeGroupOption -> recipeGroupOption.recipeGroupResponseToDomain() }?.toMutableList(),
-    recipeIngredient = this.recipeIngredient?.map { recipeIngredientOption -> recipeIngredientOption.recipeIngredientResponseToDomain() }?.toMutableList()
+    recipeGroup = this.recipeGroup?.map { recipeGroupOption -> recipeGroupOption.recipeGroupResponseToDomain() },
+    recipeIngredient = this.recipeIngredient?.map { recipeIngredientOption -> recipeIngredientOption.recipeIngredientResponseToDomain() }
 )
