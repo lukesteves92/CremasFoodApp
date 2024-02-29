@@ -2,7 +2,7 @@ package com.cremasfood.app.utils
 
 object Constants {
     object Text {
-        internal const val EMPTY_STRING_DEFAULT = ""
+        const val EMPTY_STRING_DEFAULT = ""
     }
 
     object Numbers {

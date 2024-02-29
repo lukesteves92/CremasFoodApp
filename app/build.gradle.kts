@@ -15,11 +15,12 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+        android.buildFeatures.buildConfig = true
+        buildConfigField(type = "String", name = "URL_BASE", value = "\"https://teste.com.br/\"")
     }
 
     buildTypes {
