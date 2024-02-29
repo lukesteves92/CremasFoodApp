@@ -1,8 +1,7 @@
 package com.cremasfood.app.extensions.string
 
-import com.cremasfood.app.data.remote.model.GenericException
+import com.cremasfood.app.data.remote.model.exception.GenericException
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 

@@ -1,4 +1,4 @@
-package com.cremasfood.app.data.remote.model
+package com.cremasfood.app.data.remote.model.exception
 
 data class GenericException(
     val title: String? = null,
