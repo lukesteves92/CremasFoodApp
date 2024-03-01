@@ -15,11 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.cremasfood.app.R
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.ui.color.BackgroundColor
 import com.cremasfood.app.ui.color.ImageHover
@@ -39,7 +42,14 @@ fun RecipeCard(
             onClick.invoke(recipe)
         }) {
         Image(
-            painter = rememberAsyncImagePainter(recipe.imageBase64),
+            painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current)
+                    .data(recipe.imageBase64)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        error(R.drawable.no_image_available)
+                        placeholder(R.drawable.no_image_available)
+                    }).build()
+            ),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()

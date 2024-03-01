@@ -122,4 +122,7 @@ dependencies {
     //Debug Compose
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Maps Compose
+    implementation("com.google.maps.android:maps-compose:4.3.3")
 }

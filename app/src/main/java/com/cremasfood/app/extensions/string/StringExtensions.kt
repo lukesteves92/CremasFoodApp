@@ -18,3 +18,7 @@ internal fun String?.toDefaultError() = try {
 } catch (e: Exception) {
     GenericException(code = "999", message = "generic error")
 }
+
+internal fun String.convertLat() = this.split("|")[0]
+
+internal fun String.convertLong() = this.split("|")[1]
