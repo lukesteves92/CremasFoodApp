@@ -1,4 +1,4 @@
-package com.cremasfood.app.ui.components
+package com.cremasfood.app.ui.components.loading
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

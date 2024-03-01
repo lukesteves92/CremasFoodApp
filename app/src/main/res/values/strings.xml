@@ -5,4 +5,6 @@
     <string name="bt_cremas_cancel">cancel</string>
     <string name="cremas_search_recipe">search a recipe</string>
     <string name="cremas_tb_title">Crema`s Food</string>
+    <string name="recipe_details_ingredients_title">Ingredients\n</string>
+    <string name="recipe_details_ingredient_items">Items</string>
 </resources>

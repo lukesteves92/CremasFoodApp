@@ -21,7 +21,7 @@ import coil.request.ImageRequest
 import com.cremasfood.app.R
 import com.cremasfood.app.features.splash.navigation.SplashNavigation
 import com.cremasfood.app.ui.color.BackgroundColor
-import com.cremasfood.app.ui.components.Loading
+import com.cremasfood.app.ui.components.loading.Loading
 import org.koin.androidx.compose.inject
 
 @Composable

@@ -29,16 +29,21 @@ import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
 @Composable
 fun ToolbarSearch(
     modifier: Modifier = Modifier,
+    title: String? = null,
     onBackPressed: (() -> Unit)? = null
 ) {
     TopAppBar(
         modifier = modifier,
         title = {
-            Text(
-                text = stringResource(id = R.string.cremas_tb_title),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            if (!title.isNullOrEmpty()) {
+                Text(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            } else {
+                Text(
+                    text = stringResource(id = R.string.cremas_tb_title),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         },
         navigationIcon = onBackPressed?.let { action ->
             {
