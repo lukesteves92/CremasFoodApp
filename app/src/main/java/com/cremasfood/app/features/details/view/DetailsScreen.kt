@@ -52,7 +52,7 @@ import com.cremasfood.app.features.details.navigation.DetailsNavigation
 import com.cremasfood.app.ui.color.BackgroundColor
 import com.cremasfood.app.ui.color.LightBlack
 import com.cremasfood.app.ui.color.OrangeMain
-import com.cremasfood.app.ui.components.bottomsheet.SheetLayout
+import com.cremasfood.app.ui.components.bottomsheet.main.SheetLayout
 import com.cremasfood.app.ui.components.button.ButtonOutline
 import com.cremasfood.app.ui.components.toolbar.ToolbarSearch
 import com.cremasfood.app.utils.Constants.Numbers.KEY_DEFAULT_LAT_LONG

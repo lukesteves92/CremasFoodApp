@@ -1,6 +1,7 @@
-package com.cremasfood.app.ui.components.bottomsheet
+package com.cremasfood.app.ui.components.bottomsheet.main
 
 import androidx.compose.runtime.Composable
+import com.cremasfood.app.ui.components.bottomsheet.maps.MapsScreen
 
 @Composable
 fun SheetLayout(lat: Double, long: Double, onCloseBottomSheet: () -> Unit) {

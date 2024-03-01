@@ -1,4 +1,4 @@
-package com.cremasfood.app.ui.components.bottomsheet
+package com.cremasfood.app.ui.components.bottomsheet.title
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
