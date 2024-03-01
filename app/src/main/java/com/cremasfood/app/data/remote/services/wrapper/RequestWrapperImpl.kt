@@ -11,7 +11,7 @@ import javax.net.ssl.HttpsURLConnection
 
 class RequestWrapperImpl: RequestWrapper {
 
-    override suspend fun <T : Any> wrapper(call: suspend () -> Response<T>): ResponseApi<T> {
+    override suspend fun <T : Any> wrapper(call: suspend () -> Response<T>): ResponseApi{
         return try {
             val response = call.invoke()
             val errorBody = response.errorBody()?.string() ?: EMPTY_STRING_DEFAULT

@@ -7,5 +7,6 @@ object Constants {
 
     object Numbers {
         internal const val KEY_NUMBER_ONE = 1
+        internal const val KEY_NUMBER_TEN = 10
     }
 }

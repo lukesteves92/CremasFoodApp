@@ -1,4 +1,4 @@
-package com.cremasfood.app.data.utils
+package com.cremasfood.app.data.utils.singleorthrow
 
 import com.cremasfood.app.data.utils.exception.CremasFoodException
 import kotlinx.coroutines.flow.Flow

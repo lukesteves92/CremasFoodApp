@@ -4,6 +4,7 @@ import android.app.Application
 import com.cremasfood.app.di.data.dataModule
 import com.cremasfood.app.di.navigation.navigationModule
 import com.cremasfood.app.di.presentation.presentationModule
+import com.cremasfood.app.di.usecase.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -16,7 +17,8 @@ class BaseApplication : Application() {
                 listOf(
                     navigationModule,
                     presentationModule,
-                    dataModule
+                    dataModule,
+                    useCaseModule
                 )
             )
         }
