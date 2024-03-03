@@ -37,26 +37,30 @@ fun SearchScreen(
     val state by rememberFlowWithLifecycle(viewModel.state)
         .collectAsState(initial = SearchState.EMPTY)
 
-    Search(modifier = modifier, searchText = searchText, state = state)
+    Search(modifier = modifier, searchText = searchText, state = state, viewModel = viewModel)
 }
 
 @Composable
 fun Search(
     modifier: Modifier,
     searchText: String,
-    state: SearchState
+    state: SearchState,
+    viewModel: SearchViewModel
 ) {
     val pagedList = state.recipes.collectAsLazyPagingItems()
     val text = remember { mutableStateOf(searchText) }
-    val dispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     val navigation: SearchNavigation by inject()
 
     SearchToolbar(
         searchText = text.value,
         goBack = false,
-        onSearchClick = {},
+        onSearchClick = {
+            if (text.value.isNotEmpty()) {
+                viewModel.dispatchViewAction(searchText = text.value)
+            }
+        },
         onNavigateUpClick = {
-            dispatcher?.onBackPressed()
+            navigation.popBackStack()
         },
         contentBottom = {},
         onTextChanged = {
