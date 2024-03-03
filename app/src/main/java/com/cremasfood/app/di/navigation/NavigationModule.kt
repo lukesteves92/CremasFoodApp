@@ -4,6 +4,8 @@ import com.cremasfood.app.features.details.navigation.DetailsNavigation
 import com.cremasfood.app.features.details.navigation.DetailsNavigationImpl
 import com.cremasfood.app.features.home.navigation.HomeNavigation
 import com.cremasfood.app.features.home.navigation.HomeNavigationImpl
+import com.cremasfood.app.features.search.navigation.SearchNavigation
+import com.cremasfood.app.features.search.navigation.SearchNavigationImpl
 import com.cremasfood.app.features.splash.navigation.SplashNavigation
 import com.cremasfood.app.features.splash.navigation.SplashNavigationImpl
 import com.cremasfood.app.navigation.manager.NavigationManager
@@ -24,5 +26,9 @@ val navigationModule = module {
 
     factory<DetailsNavigation> {
         DetailsNavigationImpl(navManager = get())
+    }
+
+    factory<SearchNavigation> {
+        SearchNavigationImpl(navManager = get())
     }
 }

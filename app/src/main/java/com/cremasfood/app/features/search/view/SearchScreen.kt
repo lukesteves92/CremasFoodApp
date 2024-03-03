@@ -1,9 +1,10 @@
-package com.cremasfood.app.features.home.view
+package com.cremasfood.app.features.search.view
 
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,52 +14,51 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.cremasfood.app.extensions.features.rememberFlowWithLifecycle
-import com.cremasfood.app.features.home.navigation.HomeNavigation
-import com.cremasfood.app.features.home.state.HomeState
-import com.cremasfood.app.features.home.viewmodel.HomeViewModel
+import com.cremasfood.app.features.search.navigation.SearchNavigation
+import com.cremasfood.app.features.search.state.SearchState
+import com.cremasfood.app.features.search.viewmodel.SearchViewModel
 import com.cremasfood.app.ui.components.loading.Loading
 import com.cremasfood.app.ui.components.recipecard.RecipeCard
 import com.cremasfood.app.ui.components.toolbar.SearchToolbar
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
 import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.inject
 
 @Composable
-fun HomeScreen(
+fun SearchScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = getViewModel()
+    searchText: String,
+    viewModel: SearchViewModel = getViewModel()
 ) {
 
-    val state by rememberFlowWithLifecycle(viewModel.state)
-        .collectAsState(initial = HomeState.EMPTY)
+    LaunchedEffect(Unit) {
+        viewModel.dispatchViewAction(searchText = searchText)
+    }
 
-    Home(modifier = modifier, state = state)
+    val state by rememberFlowWithLifecycle(viewModel.state)
+        .collectAsState(initial = SearchState.EMPTY)
+
+    Search(modifier = modifier, searchText = searchText, state = state)
 }
 
 @Composable
-fun Home(
+fun Search(
     modifier: Modifier,
-    state: HomeState
+    searchText: String,
+    state: SearchState
 ) {
     val pagedList = state.recipes.collectAsLazyPagingItems()
-    val text = remember { mutableStateOf(EMPTY_STRING_DEFAULT) }
+    val text = remember { mutableStateOf(searchText) }
     val dispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
-    val navigation: HomeNavigation by inject()
+    val navigation: SearchNavigation by inject()
 
     SearchToolbar(
         searchText = text.value,
         goBack = false,
-        onSearchClick = {
-            if (text.value.isNotEmpty()) {
-                navigation.navigateToSearch(searchText = text.value)
-            }
-        },
+        onSearchClick = {},
         onNavigateUpClick = {
             dispatcher?.onBackPressed()
         },
-        contentBottom = {
-
-        },
+        contentBottom = {},
         onTextChanged = {
             text.value = it
         },

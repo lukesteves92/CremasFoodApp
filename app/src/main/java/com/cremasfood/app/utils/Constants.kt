@@ -15,5 +15,6 @@ object Constants {
 
     object Keys {
         internal const val DETAILS_KEY = "details_key"
+        internal const val SEARCH_KEY = "search_key"
     }
 }

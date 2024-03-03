@@ -46,6 +46,7 @@ import coil.request.ImageRequest
 import com.cremasfood.app.R
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.model.recipeingredient.RecipeIngredientDomain
+import com.cremasfood.app.extensions.string.convertBase64ToBitmap
 import com.cremasfood.app.extensions.string.convertLat
 import com.cremasfood.app.extensions.string.convertLong
 import com.cremasfood.app.features.details.navigation.DetailsNavigation
@@ -131,8 +132,7 @@ fun Details(
                 )
             },
             backgroundColor = BackgroundColor,
-            content = {
-                it
+            content = { it
                 Column(
                     modifier = modifier
                         .padding(20.dp)
@@ -142,7 +142,7 @@ fun Details(
                     Image(
                         painter = rememberAsyncImagePainter(
                             ImageRequest.Builder(LocalContext.current)
-                                .data(recipe?.imageBase64)
+                                .data(recipe?.imageBase64?.convertBase64ToBitmap())
                                 .apply(block = fun ImageRequest.Builder.() {
                                     error(R.drawable.no_image_available)
                                     placeholder(R.drawable.no_image_available)

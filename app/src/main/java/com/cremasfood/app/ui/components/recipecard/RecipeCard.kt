@@ -24,6 +24,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.cremasfood.app.R
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
+import com.cremasfood.app.extensions.string.convertBase64ToBitmap
 import com.cremasfood.app.ui.color.BackgroundColor
 import com.cremasfood.app.ui.color.ImageHover
 import com.cremasfood.app.utils.Constants.Numbers.KEY_NUMBER_TWO
@@ -44,7 +45,7 @@ fun RecipeCard(
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(LocalContext.current)
-                    .data(recipe.imageBase64)
+                    .data(recipe.imageBase64?.convertBase64ToBitmap())
                     .apply(block = fun ImageRequest.Builder.() {
                         error(R.drawable.no_image_available)
                         placeholder(R.drawable.no_image_available)

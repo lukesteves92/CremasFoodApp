@@ -1,9 +1,8 @@
-package com.cremasfood.app.features.home.navigation
+package com.cremasfood.app.features.search.navigation
 
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 
-interface HomeNavigation {
-    fun navigateToSearch(searchText: String)
+interface SearchNavigation {
     fun navigateToDetails(recipe: RecipeDomain?)
     fun popBackStack()
 }

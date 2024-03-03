@@ -11,12 +11,14 @@ import androidx.navigation.compose.composable
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.features.details.view.DetailsScreen
 import com.cremasfood.app.features.home.view.HomeScreen
+import com.cremasfood.app.features.search.view.SearchScreen
 import com.cremasfood.app.features.splash.view.SplashScreen
 import com.cremasfood.app.navigation.manager.NavigationCommand
 import com.cremasfood.app.navigation.manager.NavigationManager
 import com.cremasfood.app.navigation.manager.NavigationType
 import com.cremasfood.app.navigation.screen.Screen
 import com.cremasfood.app.utils.Constants.Keys.DETAILS_KEY
+import com.cremasfood.app.utils.Constants.Keys.SEARCH_KEY
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.inject
@@ -46,6 +48,13 @@ fun Navigation(navController: NavHostController, startDestination: String) {
         ) { entry ->
             val recipe = entry.arguments?.getParcelable<RecipeDomain>(DETAILS_KEY)
             DetailsScreen(recipe = recipe)
+        }
+        composable(
+            route = Screen.Search.route + "/{$SEARCH_KEY}",
+            arguments = Screen.Search.arguments
+        ) { entry ->
+            val searchText = entry.arguments?.getString(SEARCH_KEY)
+            SearchScreen(searchText = searchText)
         }
     }
 }

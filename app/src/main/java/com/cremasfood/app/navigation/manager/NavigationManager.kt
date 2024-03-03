@@ -67,9 +67,9 @@ sealed class NavigationCommand {
         val destination: String, val navOptions: NavOptions? = null, val type: NavigationType
     ) : NavigationCommand()
 
-    object NavigateUp : NavigationCommand()
+    data object NavigateUp : NavigationCommand()
 
-    object PopStackBack : NavigationCommand()
+    data object PopStackBack : NavigationCommand()
 
-    object OnBackPressed : NavigationCommand()
+    data object OnBackPressed : NavigationCommand()
 }
