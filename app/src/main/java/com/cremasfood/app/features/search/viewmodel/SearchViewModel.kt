@@ -22,14 +22,8 @@ class SearchViewModel(
     }
     private fun getAllRecipesUseCase(searchText: String) {
         viewModelScope.launch {
-            getAllRecipesUseCase.getAllRecipes(search = searchText).singleOrThrow(
-                success = { pagedList ->
-                    _state.value = _state.value.copy(recipes = flowOf(pagedList), showError = false)
-                },
-                error = {
-                    _state.value = _state.value.copy(showError = true)
-                }
-            )
+            val pagedList = getAllRecipesUseCase.getAllRecipes(search = searchText)
+            _state.value = _state.value.copy(recipes = pagedList)
         }
     }
 }

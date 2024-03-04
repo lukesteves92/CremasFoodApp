@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 
 val dataModule = module {
-    factory {
+    single {
         CoroutineScope(Dispatchers.IO)
     }
 

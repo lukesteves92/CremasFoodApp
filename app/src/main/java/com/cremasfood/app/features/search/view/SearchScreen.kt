@@ -74,12 +74,6 @@ fun Search(
         },
         content = {
             when {
-                state.showError -> {
-                    ApiErrorScreen {
-                        viewModel.dispatchViewAction(searchText = text.value)
-                    }
-                }
-
                 pagedList.loadState.refresh is LoadState.Loading -> {
                     Loading()
                 }

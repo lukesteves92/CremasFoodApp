@@ -27,7 +27,6 @@ object RetrofitConfig {
         return retrofit.create()
 
     }
-
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder.readTimeout(10, TimeUnit.SECONDS)

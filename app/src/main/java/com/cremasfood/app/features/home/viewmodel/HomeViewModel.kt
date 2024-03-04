@@ -24,14 +24,8 @@ class HomeViewModel(
 
     fun getAllRecipesUseCase() {
         viewModelScope.launch {
-            getAllRecipesUseCase.getAllRecipes().singleOrThrow(
-                success = { pagedList ->
-                    _state.value = _state.value.copy(recipes = flowOf(pagedList), showError = false)
-                },
-                error = {
-                    _state.value = _state.value.copy(showError = true)
-                }
-            )
+            val pagedList = getAllRecipesUseCase.getAllRecipes()
+            _state.value = _state.value.copy(recipes = pagedList)
         }
     }
 }

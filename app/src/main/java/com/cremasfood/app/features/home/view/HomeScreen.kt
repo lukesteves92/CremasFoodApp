@@ -61,18 +61,12 @@ fun Home(
             text.value = it
         },
         content = {
-            when {
-                state.showError -> {
-                    ApiErrorScreen {
-                        viewModel.getAllRecipesUseCase()
-                    }
-                }
-
-                pagedList.loadState.refresh is LoadState.Loading -> {
+            when (pagedList.loadState.refresh) {
+                is LoadState.Loading -> {
                     Loading()
                 }
 
-                pagedList.loadState.refresh is LoadState.Error -> {
+                is LoadState.Error -> {
                     ApiErrorScreen {
                         viewModel.getAllRecipesUseCase()
                     }
