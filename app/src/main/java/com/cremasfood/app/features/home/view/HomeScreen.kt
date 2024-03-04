@@ -19,6 +19,8 @@ import com.cremasfood.app.ui.components.apierror.ApiErrorScreen
 import com.cremasfood.app.ui.components.loading.Loading
 import com.cremasfood.app.ui.components.recipecard.RecipeCard
 import com.cremasfood.app.ui.components.toolbar.SearchToolbar
+import com.cremasfood.app.utils.constants.Constants
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_NUMBER_ZERO
 import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.inject
@@ -61,34 +63,43 @@ fun Home(
             text.value = it
         },
         content = {
-            when (pagedList.loadState.refresh) {
-                is LoadState.Loading -> {
+            when {
+                pagedList.loadState.refresh is LoadState.Loading ||
+                        pagedList.loadState.append is LoadState.Loading -> {
                     Loading()
                 }
 
-                is LoadState.Error -> {
+                pagedList.loadState.refresh is LoadState.Error ||
+                        pagedList.loadState.append is LoadState.Error ||
+                        pagedList.loadState.prepend is LoadState.Error -> {
                     ApiErrorScreen {
                         viewModel.getAllRecipesUseCase()
                     }
                 }
 
                 else -> {
-                    LazyColumn(
-                        contentPadding = PaddingValues(16.dp)
-                    ) {
-                        items(pagedList.itemCount) { index ->
-                            pagedList[index]?.let { cardItem ->
-                                RecipeCard(
-                                    recipe = cardItem,
-                                    onClick = {
-                                        navigation.navigateToDetails(recipe = cardItem)
-                                    })
-                            }
+                    if (pagedList.itemCount == KEY_NUMBER_ZERO) {
+                        ApiErrorScreen {
+                            viewModel.getAllRecipesUseCase()
                         }
+                    } else {
+                        LazyColumn(
+                            contentPadding = PaddingValues(16.dp)
+                        ) {
+                            items(pagedList.itemCount) { index ->
+                                pagedList[index]?.let { cardItem ->
+                                    RecipeCard(
+                                        recipe = cardItem,
+                                        onClick = {
+                                            navigation.navigateToDetails(recipe = cardItem)
+                                        })
+                                }
+                            }
 
-                        if (pagedList.loadState.append == LoadState.Loading) {
-                            item {
-                                Loading()
+                            if (pagedList.loadState.append == LoadState.Loading) {
+                                item {
+                                    Loading()
+                                }
                             }
                         }
                     }
