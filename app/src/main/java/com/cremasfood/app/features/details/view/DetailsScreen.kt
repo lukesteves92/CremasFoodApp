@@ -46,7 +46,6 @@ import coil.request.ImageRequest
 import com.cremasfood.app.R
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.model.recipeingredient.RecipeIngredientDomain
-import com.cremasfood.app.extensions.string.convertBase64ToBitmap
 import com.cremasfood.app.extensions.string.convertLat
 import com.cremasfood.app.extensions.string.convertLong
 import com.cremasfood.app.features.details.navigation.DetailsNavigation
@@ -142,7 +141,7 @@ fun Details(
                     Image(
                         painter = rememberAsyncImagePainter(
                             ImageRequest.Builder(LocalContext.current)
-                                .data(recipe?.imageBase64?.convertBase64ToBitmap())
+                                .data(recipe?.imageBase64 ?: R.drawable.no_image_available)
                                 .apply(block = fun ImageRequest.Builder.() {
                                     error(R.drawable.no_image_available)
                                     placeholder(R.drawable.no_image_available)

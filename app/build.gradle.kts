@@ -21,7 +21,7 @@ android {
             useSupportLibrary = true
         }
         android.buildFeatures.buildConfig = true
-        buildConfigField(type = "String", name = "URL_BASE", value = "\"http://localhost:5040\"")
+        buildConfigField(type = "String", name = "URL_BASE", value = "\"https://d77f-2804-7f0-9541-eebb-d93e-45e2-e31a-606b.ngrok-free.app\"")
     }
 
     buildTypes {

@@ -10,6 +10,7 @@ import com.cremasfood.app.domain.model.ingredient.IngredientDomain
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.model.recipegroup.RecipeGroupDomain
 import com.cremasfood.app.domain.model.recipeingredient.RecipeIngredientDomain
+import com.cremasfood.app.extensions.string.convertBase64ToBitmap
 
 internal fun CountryResponse.countryResponseToDomain() = CountryDomain(
     id = this.id,
@@ -38,7 +39,7 @@ internal fun RecipeIngredientResponse.recipeIngredientResponseToDomain() = Recip
 internal fun RecipeResponse.recipeResponseToDomain() = RecipeDomain(
     id = this.id,
     title = this.title,
-    imageBase64 = this.imageBase64,
+    imageBase64 = this.imageBase64?.convertBase64ToBitmap(),
     description = this.description,
     country = this.country?.countryResponseToDomain(),
     recipeGroup = this.recipeGroup?.map { recipeGroupOption -> recipeGroupOption.recipeGroupResponseToDomain() },

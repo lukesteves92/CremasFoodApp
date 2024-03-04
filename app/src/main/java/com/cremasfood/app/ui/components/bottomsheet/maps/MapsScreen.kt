@@ -27,7 +27,7 @@ fun MapsScreen(lat: Double, long: Double, onClickDeny: () -> Unit) {
     val cameraPositionState: CameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(
             LatLng(lat, long),
-            18f
+            5f
         )
     }
 

@@ -48,14 +48,12 @@ fun ButtonOutline(
         enabled = enabled,
         content = {
             Text(
-                modifier = modifier
-                    .alpha(alpha)
-                    .align(Alignment.CenterVertically)
-                    .wrapContentHeight(),
                 text = text,
+                modifier = Modifier
+                    .align(Alignment.CenterVertically),
+                fontSize = 16.sp,
                 style = textStyle,
-                textAlign = TextAlign.Center,
-                fontSize = 16.sp
+                textAlign = TextAlign.Center
             )
         },
         onClick = onClick

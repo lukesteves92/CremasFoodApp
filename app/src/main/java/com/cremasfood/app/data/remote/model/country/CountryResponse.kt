@@ -3,10 +3,10 @@ package com.cremasfood.app.data.remote.model.country
 import com.google.gson.annotations.SerializedName
 
 data class CountryResponse(
-    @SerializedName(value = "Id")
+    @SerializedName(value = "id")
     val id: String? = null,
-    @SerializedName(value = "Name")
+    @SerializedName(value = "name")
     val name: String? = null,
-    @SerializedName(value = "GeoCoordinates")
+    @SerializedName(value = "geoCoordinates")
     val geoCoordinates: String? = null
 )

@@ -39,7 +39,7 @@ object RetrofitConfig {
             logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             builder.addInterceptor(logInterceptor)
         }
-        builder.addInterceptor(AddInterceptorHeader())
+//        builder.addInterceptor(AddInterceptorHeader())
         builder.addInterceptor(AddInterceptorQuery())
 
         return builder.build()

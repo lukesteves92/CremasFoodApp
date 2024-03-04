@@ -72,7 +72,7 @@ fun Home(
 
                 else -> {
                     LazyColumn(
-                        contentPadding = PaddingValues(horizontal = 16.dp)
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         items(pagedList.itemCount) { index ->
                             pagedList[index]?.let { cardItem ->

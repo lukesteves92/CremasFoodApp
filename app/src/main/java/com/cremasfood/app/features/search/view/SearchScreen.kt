@@ -20,24 +20,25 @@ import com.cremasfood.app.features.search.viewmodel.SearchViewModel
 import com.cremasfood.app.ui.components.loading.Loading
 import com.cremasfood.app.ui.components.recipecard.RecipeCard
 import com.cremasfood.app.ui.components.toolbar.SearchToolbar
+import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
 import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.inject
 
 @Composable
 fun SearchScreen(
     modifier: Modifier = Modifier,
-    searchText: String,
+    searchText: String?,
     viewModel: SearchViewModel = getViewModel()
 ) {
 
     LaunchedEffect(Unit) {
-        viewModel.dispatchViewAction(searchText = searchText)
+        viewModel.dispatchViewAction(searchText = searchText ?: EMPTY_STRING_DEFAULT)
     }
 
     val state by rememberFlowWithLifecycle(viewModel.state)
         .collectAsState(initial = SearchState.EMPTY)
 
-    Search(modifier = modifier, searchText = searchText, state = state, viewModel = viewModel)
+    Search(modifier = modifier, searchText = searchText ?: EMPTY_STRING_DEFAULT, state = state, viewModel = viewModel)
 }
 
 @Composable
@@ -76,7 +77,7 @@ fun Search(
 
                 else -> {
                     LazyColumn(
-                        contentPadding = PaddingValues(horizontal = 16.dp)
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         items(pagedList.itemCount) { index ->
                             pagedList[index]?.let { cardItem ->
