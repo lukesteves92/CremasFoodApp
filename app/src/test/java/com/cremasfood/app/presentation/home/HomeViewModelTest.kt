@@ -1,13 +1,11 @@
 package com.cremasfood.app.presentation.home
 
-import android.content.Context
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.usecase.recipes.GetAllRecipesUseCase
 import com.cremasfood.app.features.home.viewmodel.HomeViewModel
 import com.cremasfood.app.main.MainDispatcherRule
-import com.cremasfood.app.utils.internet.CheckInternet
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,7 +22,6 @@ class HomeViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val context: Context = mockk(relaxed = true)
     private val getAllRecipesUseCase: GetAllRecipesUseCase = mockk(relaxed = true)
     private lateinit var homeViewModel: HomeViewModel
 
@@ -34,19 +31,6 @@ class HomeViewModelTest {
             getAllRecipesUseCase = getAllRecipesUseCase
         )
     }
-
-    @Test
-    fun shouldCheckInternetConnectionFalse() = runTest {
-
-        coEvery {
-            CheckInternet.isInternetAvailable(context = context)
-        } returns false
-
-        homeViewModel.checkInternetConnection(context = context)
-
-        assert(!homeViewModel.state.value.checkInternet)
-    }
-
 
     @Test
     fun shouldCheckAllRecipesUseCase() = runTest {
@@ -59,7 +43,7 @@ class HomeViewModelTest {
             getAllRecipesUseCase.getAllRecipes(search = searchText)
         } returns flowOf(testData)
 
-        homeViewModel.checkInternetConnection(context = context)
+        homeViewModel.getAllRecipesUseCase()
 
         homeViewModel.state.value.recipes.collect { list ->
             list.map { listData ->
@@ -80,7 +64,7 @@ class HomeViewModelTest {
             getAllRecipesUseCase.getAllRecipes(search = searchText)
         } returns flowOf(testData)
 
-        homeViewModel.checkInternetConnection(context = context)
+        homeViewModel.getAllRecipesUseCase()
 
         homeViewModel.state.value.recipes.collect { list ->
             list.map { listData ->

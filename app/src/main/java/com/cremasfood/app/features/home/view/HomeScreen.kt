@@ -1,16 +1,13 @@
 package com.cremasfood.app.features.home.view
 
-import android.content.Context
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -30,22 +27,16 @@ import org.koin.androidx.compose.inject
 fun HomeScreen(
     viewModel: HomeViewModel = getViewModel()
 ) {
-    val context = LocalContext.current
     val state by rememberFlowWithLifecycle(viewModel.state)
         .collectAsState(initial = HomeState.EMPTY)
 
-    LaunchedEffect(Unit) {
-        viewModel.checkInternetConnection(context = context)
-    }
-
-    Home(state = state, viewModel = viewModel, context = context)
+    Home(state = state, viewModel = viewModel)
 }
 
 @Composable
 fun Home(
     state: HomeState,
-    viewModel: HomeViewModel,
-    context: Context
+    viewModel: HomeViewModel
 ) {
     val pagedList = state.recipes.collectAsLazyPagingItems()
     val text = remember { mutableStateOf(EMPTY_STRING_DEFAULT) }
@@ -71,9 +62,9 @@ fun Home(
         },
         content = {
             when {
-                !state.checkInternet -> {
+                state.showError -> {
                     ApiErrorScreen {
-                        viewModel.checkInternetConnection(context = context)
+                        viewModel.getAllRecipesUseCase()
                     }
                 }
 
@@ -83,7 +74,7 @@ fun Home(
 
                 pagedList.loadState.refresh is LoadState.Error -> {
                     ApiErrorScreen {
-                        viewModel.checkInternetConnection(context = context)
+                        viewModel.getAllRecipesUseCase()
                     }
                 }
 

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 data class HomeState(
-    val checkInternet: Boolean = false,
+    val showError: Boolean = false,
     val recipes: Flow<PagingData<RecipeDomain>> = flowOf(PagingData.empty())
 ) {
     companion object {

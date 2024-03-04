@@ -1,13 +1,13 @@
 package com.cremasfood.app.features.home.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cremasfood.app.data.utils.singleorthrow.singleOrThrow
 import com.cremasfood.app.domain.usecase.recipes.GetAllRecipesUseCase
 import com.cremasfood.app.features.home.state.HomeState
-import com.cremasfood.app.utils.internet.CheckInternet.isInternetAvailable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -18,19 +18,20 @@ class HomeViewModel(
         MutableStateFlow(HomeState.EMPTY)
     var state: StateFlow<HomeState> = _state
 
-    fun checkInternetConnection(context: Context) {
-        if (!isInternetAvailable(context)) {
-            _state.value = _state.value.copy(checkInternet = false)
-        } else {
-            _state.value = _state.value.copy(checkInternet = true)
-            getAllRecipesUseCase()
-        }
+    init {
+        getAllRecipesUseCase()
     }
 
-    private fun getAllRecipesUseCase() {
+    fun getAllRecipesUseCase() {
         viewModelScope.launch {
-            val list = getAllRecipesUseCase.getAllRecipes()
-            _state.value = _state.value.copy(recipes = list)
+            getAllRecipesUseCase.getAllRecipes().singleOrThrow(
+                success = { pagedList ->
+                    _state.value = _state.value.copy(recipes = flowOf(pagedList), showError = false)
+                },
+                error = {
+                    _state.value = _state.value.copy(showError = true)
+                }
+            )
         }
     }
 }

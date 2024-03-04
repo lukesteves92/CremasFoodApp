@@ -1,6 +1,5 @@
 package com.cremasfood.app.features.search.view
 
-import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -9,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -35,20 +33,17 @@ fun SearchScreen(
     viewModel: SearchViewModel = getViewModel()
 ) {
 
-    val context = LocalContext.current
-
     val state by rememberFlowWithLifecycle(viewModel.state)
         .collectAsState(initial = SearchState.EMPTY)
 
     LaunchedEffect(Unit) {
-        viewModel.dispatchViewAction(searchText = searchText ?: EMPTY_STRING_DEFAULT, context = context)
+        viewModel.dispatchViewAction(searchText = searchText ?: EMPTY_STRING_DEFAULT)
     }
 
     Search(
         searchText = searchText ?: EMPTY_STRING_DEFAULT,
         state = state,
-        viewModel = viewModel,
-        context = context
+        viewModel = viewModel
     )
 }
 
@@ -56,8 +51,7 @@ fun SearchScreen(
 fun Search(
     searchText: String,
     state: SearchState,
-    viewModel: SearchViewModel,
-    context: Context
+    viewModel: SearchViewModel
 ) {
     val pagedList = state.recipes.collectAsLazyPagingItems()
     val text = remember { mutableStateOf(searchText) }
@@ -68,7 +62,7 @@ fun Search(
         goBack = false,
         onSearchClick = {
             if (text.value.isNotEmpty()) {
-                viewModel.dispatchViewAction(searchText = text.value, context = context)
+                viewModel.dispatchViewAction(searchText = text.value)
             }
         },
         onNavigateUpClick = {
@@ -80,9 +74,9 @@ fun Search(
         },
         content = {
             when {
-                !state.checkInternet -> {
+                state.showError -> {
                     ApiErrorScreen {
-                        viewModel.dispatchViewAction(searchText = text.value, context = context)
+                        viewModel.dispatchViewAction(searchText = text.value)
                     }
                 }
 

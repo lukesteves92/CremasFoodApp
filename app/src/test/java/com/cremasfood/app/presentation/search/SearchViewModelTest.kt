@@ -1,13 +1,11 @@
 package com.cremasfood.app.presentation.search
 
-import android.content.Context
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.usecase.recipes.GetAllRecipesUseCase
 import com.cremasfood.app.features.search.viewmodel.SearchViewModel
 import com.cremasfood.app.main.MainDispatcherRule
-import com.cremasfood.app.utils.internet.CheckInternet
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,7 +22,6 @@ class SearchViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val context: Context = mockk(relaxed = true)
     private val getAllRecipesUseCase: GetAllRecipesUseCase = mockk(relaxed = true)
     private lateinit var searchViewModel: SearchViewModel
 
@@ -34,21 +31,6 @@ class SearchViewModelTest {
             getAllRecipesUseCase = getAllRecipesUseCase
         )
     }
-
-    @Test
-    fun shouldCheckInternetConnectionFalse() = runTest {
-
-        val searchText = ""
-
-        coEvery {
-            CheckInternet.isInternetAvailable(context = context)
-        } returns false
-
-        searchViewModel.dispatchViewAction(searchText = searchText, context = context)
-
-        assert(!searchViewModel.state.value.checkInternet)
-    }
-
 
     @Test
     fun shouldCheckAllRecipesUseCase() = runTest {
@@ -61,7 +43,7 @@ class SearchViewModelTest {
             getAllRecipesUseCase.getAllRecipes(search = searchText)
         } returns flowOf(testData)
 
-        searchViewModel.dispatchViewAction(searchText = searchText, context = context)
+        searchViewModel.dispatchViewAction(searchText = searchText)
 
         searchViewModel.state.value.recipes.collect { list ->
             list.map { listData ->
@@ -82,7 +64,7 @@ class SearchViewModelTest {
             getAllRecipesUseCase.getAllRecipes(search = searchText)
         } returns flowOf(testData)
 
-        searchViewModel.dispatchViewAction(searchText = searchText, context = context)
+        searchViewModel.dispatchViewAction(searchText = searchText)
 
         searchViewModel.state.value.recipes.collect { list ->
             list.map { listData ->
