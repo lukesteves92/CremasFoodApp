@@ -4,7 +4,7 @@ import com.cremasfood.app.data.remote.services.responseapi.ResponseApi
 import com.cremasfood.app.data.utils.exception.CremasFoodException
 import com.cremasfood.app.extensions.string.containsTagHtml
 import com.cremasfood.app.extensions.string.toDefaultError
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 import retrofit2.Response
 import java.io.IOException
 import javax.net.ssl.HttpsURLConnection

@@ -1,6 +1,6 @@
 package com.cremasfood.app.data.utils.exception
 
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 
 sealed class CremasFoodException(
     override val message: String? = EMPTY_STRING_DEFAULT,

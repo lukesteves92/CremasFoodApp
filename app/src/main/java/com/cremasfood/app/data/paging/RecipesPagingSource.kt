@@ -8,7 +8,7 @@ import com.cremasfood.app.data.remote.services.responseapi.ResponseApi
 import com.cremasfood.app.data.utils.exception.CremasFoodException
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.repository.CremasFoodRepository
-import com.cremasfood.app.utils.Constants.Numbers.KEY_NUMBER_ONE
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_NUMBER_ONE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

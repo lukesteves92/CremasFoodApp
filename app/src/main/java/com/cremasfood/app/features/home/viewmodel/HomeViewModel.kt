@@ -1,9 +1,11 @@
 package com.cremasfood.app.features.home.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cremasfood.app.domain.usecase.recipes.GetAllRecipesUseCase
 import com.cremasfood.app.features.home.state.HomeState
+import com.cremasfood.app.utils.internet.CheckInternet.isInternetAvailable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,8 +18,13 @@ class HomeViewModel(
         MutableStateFlow(HomeState.EMPTY)
     var state: StateFlow<HomeState> = _state
 
-    init {
-        getAllRecipesUseCase()
+    fun checkInternetConnection(context: Context) {
+        if (!isInternetAvailable(context)) {
+            _state.value = _state.value.copy(checkInternet = false)
+        } else {
+            _state.value = _state.value.copy(checkInternet = true)
+            getAllRecipesUseCase()
+        }
     }
 
     private fun getAllRecipesUseCase() {

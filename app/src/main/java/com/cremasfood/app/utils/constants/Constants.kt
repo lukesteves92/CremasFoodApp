@@ -1,4 +1,4 @@
-package com.cremasfood.app.utils
+package com.cremasfood.app.utils.constants
 
 object Constants {
     object Text {
@@ -6,6 +6,7 @@ object Constants {
     }
 
     object Numbers {
+        internal const val KEY_NUMBER_ZERO = 0
         internal const val KEY_NUMBER_ONE = 1
         internal const val KEY_NUMBER_TWO = 2
         internal const val KEY_NUMBER_TEN = 10

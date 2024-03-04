@@ -33,8 +33,8 @@ import com.cremasfood.app.R
 import com.cremasfood.app.ui.color.LightBlack
 import com.cremasfood.app.ui.color.OrangeMain
 import com.cremasfood.app.ui.type.Typography
-import com.cremasfood.app.utils.Constants.Numbers.KEY_NUMBER_ONE
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_NUMBER_ONE
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 
 @Composable
 fun CustomTextField(

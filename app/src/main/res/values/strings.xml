@@ -9,4 +9,9 @@
     <string name="recipe_details_ingredient_items">Items</string>
     <string name="bt_cremas_maps">Location on Maps</string>
     <string name="cremas_tv_maps_screen">Location View</string>
+    <string name="cremas_search_not_found_body"><![CDATA[we could not find any recipes! <b>\"%s\"</b>. Try searching again...]]></string>
+    <string name="cremas_search_not_found_title">eh! We didn\'t find what you searched for</string>
+    <string name="cremas_tv_title_apierror">wow, there was a problem!</string>
+    <string name="cremas_tv_body_apierror">something went wrong and we were unable to proceed. Please try again.</string>
+    <string name="cremas_re_try">try again</string>
 </resources>

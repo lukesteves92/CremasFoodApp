@@ -24,7 +24,7 @@ import com.cremasfood.app.R
 import com.cremasfood.app.ui.color.BackgroundColor
 import com.cremasfood.app.ui.color.OrangeMain
 import com.cremasfood.app.ui.components.textfields.CustomTextField
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 
 @Composable
 fun ToolbarSearch(

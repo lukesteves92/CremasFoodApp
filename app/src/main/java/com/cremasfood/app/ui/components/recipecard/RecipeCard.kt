@@ -26,8 +26,8 @@ import com.cremasfood.app.R
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.ui.color.BackgroundColor
 import com.cremasfood.app.ui.color.ImageHover
-import com.cremasfood.app.utils.Constants.Numbers.KEY_NUMBER_TWO
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_NUMBER_TWO
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 
 @Composable
 fun RecipeCard(

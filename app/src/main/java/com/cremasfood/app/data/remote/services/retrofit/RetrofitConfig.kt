@@ -1,7 +1,7 @@
 package com.cremasfood.app.data.remote.services.retrofit
 
 import com.cremasfood.app.BuildConfig
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -39,23 +39,9 @@ object RetrofitConfig {
             logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             builder.addInterceptor(logInterceptor)
         }
-//        builder.addInterceptor(AddInterceptorHeader())
         builder.addInterceptor(AddInterceptorQuery())
 
         return builder.build()
-    }
-
-    class AddInterceptorHeader : Interceptor {
-        override fun intercept(chain: Interceptor.Chain): Response {
-            val request = chain.request()
-            val original: Request.Builder = request
-                .newBuilder()
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Content-Length", "1158")
-                .addHeader("Accept", "application/json")
-                .method(request.method, request.body)
-            return chain.proceed(original.build())
-        }
     }
 
     class AddInterceptorQuery : Interceptor {

@@ -1,14 +1,16 @@
 package com.cremasfood.app.features.home.view
 
+import android.content.Context
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -16,29 +18,34 @@ import com.cremasfood.app.extensions.features.rememberFlowWithLifecycle
 import com.cremasfood.app.features.home.navigation.HomeNavigation
 import com.cremasfood.app.features.home.state.HomeState
 import com.cremasfood.app.features.home.viewmodel.HomeViewModel
+import com.cremasfood.app.ui.components.apierror.ApiErrorScreen
 import com.cremasfood.app.ui.components.loading.Loading
 import com.cremasfood.app.ui.components.recipecard.RecipeCard
 import com.cremasfood.app.ui.components.toolbar.SearchToolbar
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.inject
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = getViewModel()
 ) {
-
+    val context = LocalContext.current
     val state by rememberFlowWithLifecycle(viewModel.state)
         .collectAsState(initial = HomeState.EMPTY)
 
-    Home(modifier = modifier, state = state)
+    LaunchedEffect(Unit) {
+        viewModel.checkInternetConnection(context = context)
+    }
+
+    Home(state = state, viewModel = viewModel, context = context)
 }
 
 @Composable
 fun Home(
-    modifier: Modifier,
-    state: HomeState
+    state: HomeState,
+    viewModel: HomeViewModel,
+    context: Context
 ) {
     val pagedList = state.recipes.collectAsLazyPagingItems()
     val text = remember { mutableStateOf(EMPTY_STRING_DEFAULT) }
@@ -63,12 +70,22 @@ fun Home(
             text.value = it
         },
         content = {
-            when (pagedList.loadState.refresh) {
-                is LoadState.Loading -> {
+            when {
+                !state.checkInternet -> {
+                    ApiErrorScreen {
+                        viewModel.checkInternetConnection(context = context)
+                    }
+                }
+
+                pagedList.loadState.refresh is LoadState.Loading -> {
                     Loading()
                 }
 
-                is LoadState.Error -> {}
+                pagedList.loadState.refresh is LoadState.Error -> {
+                    ApiErrorScreen {
+                        viewModel.checkInternetConnection(context = context)
+                    }
+                }
 
                 else -> {
                     LazyColumn(

@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import com.cremasfood.app.data.paging.RecipesPagingSource
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.repository.CremasFoodRepository
-import com.cremasfood.app.utils.Constants.Numbers.KEY_NUMBER_TEN
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_NUMBER_TEN
 import kotlinx.coroutines.flow.Flow
 
 class GetAllRecipesUseCase(

@@ -17,8 +17,8 @@ import com.cremasfood.app.navigation.manager.NavigationCommand
 import com.cremasfood.app.navigation.manager.NavigationManager
 import com.cremasfood.app.navigation.manager.NavigationType
 import com.cremasfood.app.navigation.screen.Screen
-import com.cremasfood.app.utils.Constants.Keys.DETAILS_KEY
-import com.cremasfood.app.utils.Constants.Keys.SEARCH_KEY
+import com.cremasfood.app.utils.constants.Constants.Keys.DETAILS_KEY
+import com.cremasfood.app.utils.constants.Constants.Keys.SEARCH_KEY
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.inject

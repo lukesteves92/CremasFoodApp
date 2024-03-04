@@ -55,9 +55,9 @@ import com.cremasfood.app.ui.color.OrangeMain
 import com.cremasfood.app.ui.components.bottomsheet.main.SheetLayout
 import com.cremasfood.app.ui.components.button.ButtonOutline
 import com.cremasfood.app.ui.components.toolbar.ToolbarSearch
-import com.cremasfood.app.utils.Constants.Numbers.KEY_DEFAULT_LAT_LONG
-import com.cremasfood.app.utils.Constants.Numbers.KEY_DURATION_ANIMATION
-import com.cremasfood.app.utils.Constants.Text.EMPTY_STRING_DEFAULT
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_DEFAULT_LAT_LONG
+import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_DURATION_ANIMATION
+import com.cremasfood.app.utils.constants.Constants.Text.EMPTY_STRING_DEFAULT
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.inject
 
