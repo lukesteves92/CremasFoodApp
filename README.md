@@ -1,2 +1,1 @@
-# CremasFoodApp
-Food Recipes
+docker-compose -f docker-compose.yaml up -d

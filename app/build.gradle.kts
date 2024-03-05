@@ -21,7 +21,7 @@ android {
             useSupportLibrary = true
         }
         android.buildFeatures.buildConfig = true
-        buildConfigField(type = "String", name = "URL_BASE", value = "\"https://aff9-2804-7f0-9541-eebb-479e-eac5-9a6c-de92.ngrok-free.app\"")
+        buildConfigField(type = "String", name = "URL_BASE", value = "\"https://yoururl.com\"")
     }
 
     buildTypes {
