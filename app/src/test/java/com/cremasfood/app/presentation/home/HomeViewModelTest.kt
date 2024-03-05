@@ -35,9 +35,9 @@ class HomeViewModelTest {
     @Test
     fun shouldCheckAllRecipesUseCase() = runTest {
 
-        val searchText = "Brazilian Caipirinha"
+        val searchText = KEY_SEARCH_TEXT
         val testData =
-            PagingData.from(listOf(RecipeDomain(id = "500", title = "Brazilian Caipirinha")))
+            PagingData.from(listOf(RecipeDomain(id = KEY_ID_RECIPE, title = KEY_SEARCH_TEXT)))
 
         coEvery {
             getAllRecipesUseCase.getAllRecipes(search = searchText)
@@ -57,7 +57,7 @@ class HomeViewModelTest {
     @Test
     fun shouldCheckAllRecipesUseCaseEmptyList() = runTest {
 
-        val searchText = "Brazilian Caipirinha"
+        val searchText = KEY_SEARCH_TEXT
         val testData = PagingData.from(emptyList<RecipeDomain>())
 
         coEvery {
@@ -73,5 +73,10 @@ class HomeViewModelTest {
                 }
             }
         }
+    }
+
+    companion object {
+        private const val KEY_SEARCH_TEXT = "Brazilian Caipirinha"
+        private const val KEY_ID_RECIPE = "500"
     }
 }
