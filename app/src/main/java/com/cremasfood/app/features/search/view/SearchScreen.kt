@@ -78,7 +78,9 @@ fun Search(
                     Loading()
                 }
 
-                pagedList.loadState.refresh is LoadState.Error -> {
+                pagedList.loadState.refresh is LoadState.Error ||
+                        pagedList.loadState.append is LoadState.Error ||
+                        pagedList.loadState.prepend is LoadState.Error -> {
                     SearchNotFound(search = text.value)
                 }
 

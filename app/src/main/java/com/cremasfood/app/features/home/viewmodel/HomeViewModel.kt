@@ -2,12 +2,10 @@ package com.cremasfood.app.features.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cremasfood.app.data.utils.singleorthrow.singleOrThrow
 import com.cremasfood.app.domain.usecase.recipes.GetAllRecipesUseCase
 import com.cremasfood.app.features.home.state.HomeState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

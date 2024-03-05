@@ -5,12 +5,13 @@ import androidx.paging.PagingState
 import com.cremasfood.app.data.remote.mapper.recipeResponseToDomain
 import com.cremasfood.app.data.remote.model.recipe.RecipeResponse
 import com.cremasfood.app.data.remote.services.responseapi.ResponseApi
-import com.cremasfood.app.data.utils.exception.CremasFoodException
 import com.cremasfood.app.domain.model.recipe.RecipeDomain
 import com.cremasfood.app.domain.repository.CremasFoodRepository
 import com.cremasfood.app.utils.constants.Constants.Numbers.KEY_NUMBER_ONE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 @Suppress("UNCHECKED_CAST")
 class RecipesPagingSource(
@@ -44,9 +45,7 @@ class RecipesPagingSource(
                         result = data.map { dataList -> dataList.recipeResponseToDomain() }
                     }
 
-                    is ResponseApi.ErrorException -> {
-                        throw response.data as CremasFoodException
-                    }
+                    is ResponseApi.ErrorException -> {}
                 }
 
                 LoadResult.Page(
@@ -55,8 +54,12 @@ class RecipesPagingSource(
                     nextKey = if (result.isEmpty()) null else page.plus(KEY_NUMBER_ONE)
                 )
             }
-        } catch (e: Exception) {
-            LoadResult.Error(e)
+        } catch (exception: IOException) {
+            exception.printStackTrace()
+            return LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            exception.printStackTrace()
+            return LoadResult.Error(exception)
         }
     }
 }
