@@ -1,4 +1,4 @@
-# Crema's Food - Setup Guide
+# Crema's Food - Setup Guide - by Lucas Esteves
 ## Food Recipes App | Android | Kotlin
 
 Welcome to Crema's Food project! This guide will walk you through setting up the environment to test the project on your local machine.
