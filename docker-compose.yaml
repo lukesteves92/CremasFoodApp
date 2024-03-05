@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+    recipe:
+        image: lukesteves/recipe:latest
+        ports:
+            - "5040:8080"
+        restart: always
